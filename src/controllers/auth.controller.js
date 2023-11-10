@@ -93,4 +93,18 @@ const loginUser = async (req, res) => {
     return res.status(500).json(err);
   }
 };
-module.exports = { registerUser, loginUser };
+const logOutUser = async (req, res) => {
+  try {
+    res.clearCookie("refreshToken");
+    return res.json({
+      status: "OK",
+      message: "Logout successfully!",
+    });
+  } catch (err) {
+    res.json({
+      status: "ERR",
+      message: err,
+    });
+  }
+};
+module.exports = { registerUser, loginUser, logOutUser };

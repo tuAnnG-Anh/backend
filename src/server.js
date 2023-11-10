@@ -8,9 +8,15 @@ const cors = require("cors");
 const routes = require("./routes/app.route");
 const connectDatabase = require("./configs/database");
 var cookieParser = require("cookie-parser");
+const { corsOptions } = require("./configs/cors");
+// const { corsOptions } = require("./configs/cors");
 dotenv.config();
 const port = process.env.PORT;
 const app = express();
+
+//cors
+app.use(cors(corsOptions));
+
 //Template engine
 //config template engine
 const configHandlebar = { extname: ".hbs" };
@@ -20,9 +26,6 @@ app.set("views", path.join(__dirname, "views"));
 
 //cookie Parser
 app.use(cookieParser());
-
-//cors
-app.use(cors());
 
 //apply middleware body-parse
 app.use(express.json()); // for parsing application/json
