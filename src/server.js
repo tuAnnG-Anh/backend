@@ -38,7 +38,9 @@ app.use(morgan("combined"));
 app.use(express.static(path.join(__dirname, "public")));
 
 //Connect to mongodb
-connectDatabase();
+setTimeout(() => {
+  connectDatabase();
+}, 2000);
 //Routes
 routes(app);
 

@@ -9,7 +9,7 @@ const userRoute = require("express").Router();
 
 userRoute.get("/", getAllUsers);
 userRoute.get("/:id", getUserById);
-userRoute.put("/:id", updateUser);
+userRoute.put("/update/:id", updateUser);
 userRoute.delete("/:id", deleteUser);
 
 module.exports = userRoute;
