@@ -28,20 +28,20 @@ const getUserById = async (req, res) => {
 };
 const getAllUsers = async (req, res) => {
   try {
-    let { page, size, sort } = req.query;
+    let { _page, _size, sort } = req.query;
 
     // If the page is not applied in query.
-    if (!page) {
+    if (!_page) {
       // Make the Default value one.
-      page = 1;
+      _page = 1;
     }
-    if (!size) {
-      size = 10;
+    if (!_size) {
+      _size = 10;
     }
     //  We have to make it integer because
     // query parameter passed is string
-    const limit = parseInt(size);
-    const skip = page * limit - limit;
+    const limit = parseInt(_size);
+    const skip = _page * limit - limit;
     // We pass 1 for sorting data in
     // ascending order using ids
     // const user = await User.find().sort({ votes: 1, _id: 1 }).limit(limit);
@@ -54,8 +54,8 @@ const getAllUsers = async (req, res) => {
       return other;
     });
     res.send({
-      currentPage: page,
-      limit: size,
+      currentPage: _page,
+      limit: _size,
       data: dataUsers,
       totalItem: totalItem,
       totalPage: totalPage,
@@ -68,7 +68,6 @@ const updateUser = async (req, res) => {
   try {
     const userId = req.params.id;
     const data = req.body;
-    // res.json(userId);
     if (!userId)
       res.json({
         status: "ERR",
