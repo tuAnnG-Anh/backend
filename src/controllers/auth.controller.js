@@ -7,7 +7,7 @@ const {
 
 const registerUser = async (req, res) => {
   try {
-    const { email, name, password, confirmPassword } = req.body;
+    const { avatar, email, name, password, confirmPassword } = req.body;
     var emailRegex =
       /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
     const isCheckEmail = emailRegex.test(email);
@@ -35,6 +35,7 @@ const registerUser = async (req, res) => {
 
     //Create new user
     const newUser = new User({
+      avatar,
       email,
       name,
       password: hash,
@@ -86,7 +87,7 @@ const loginUser = async (req, res) => {
         status: "OK",
         message: "Success",
         accessToken,
-        // refreshToken,
+        refreshToken,
       });
     }
   } catch (err) {

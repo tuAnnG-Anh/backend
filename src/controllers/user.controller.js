@@ -10,16 +10,19 @@ const getUserById = async (req, res) => {
       });
     }
     const user = await User.findOne({ _id: userId });
-    !user
-      ? res.status({
-          status: "ERR",
-          message: "The user is not defined",
-        })
-      : res.json({
-          status: "OK",
-          message: "SUCESS",
-          data: user,
-        });
+    if (!user) {
+      res.status({
+        status: "ERR",
+        message: "The user is not defined",
+      });
+    } else {
+      const { password, ...response } = user._doc;
+      res.json({
+        status: "OK",
+        message: "SUCESS",
+        data: response,
+      });
+    }
   } catch (e) {
     return res.status(404).json({
       message: e,
