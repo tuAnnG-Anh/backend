@@ -25,15 +25,14 @@ const requestRefreshToken = async (req, res) => {
         status: "ERR",
         message: "The authemtication",
       });
-    console.log(user);
     const accessToken = await genneralAccessToken({
       id: user.id,
       isAdmin: user.isAdmin,
     });
-    const newRefreshToken = await genneralRefreshToken({
-      id: user.id,
-      isAdmin: user.isAdmin,
-    });
+    // const newRefreshToken = await genneralRefreshToken({
+    //   id: user.id,
+    //   isAdmin: user.isAdmin,
+    // });
     res.json({ status: "OK", message: "SUCESS", accessToken });
   });
 };

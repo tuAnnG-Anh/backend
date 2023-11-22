@@ -9,6 +9,6 @@ const authRoute = require("express").Router();
 authRoute.post("/register", registerUser);
 authRoute.post("/login", loginUser);
 authRoute.post("/logout", logOutUser);
-authRoute.post("/refresh-token", requestRefreshToken);
+authRoute.post("/refreshToken", requestRefreshToken);
 
 module.exports = authRoute;

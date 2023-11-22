@@ -16,6 +16,7 @@ const registerUser = async (req, res) => {
         status: "ERR",
         message: "The input is require!",
       });
+
     //valid user request
     if (!isCheckEmail)
       return res.status(200).json({
@@ -79,7 +80,7 @@ const loginUser = async (req, res) => {
       });
       res.cookie("refreshToken", refreshToken, {
         httpOnly: true,
-        secure: false,
+        secure: true,
         path: "/",
         sameSite: "strict",
       });
@@ -87,7 +88,7 @@ const loginUser = async (req, res) => {
         status: "OK",
         message: "Success",
         accessToken,
-        refreshToken,
+        // refreshToken,
       });
     }
   } catch (err) {

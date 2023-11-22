@@ -1,13 +1,14 @@
 const jwt = require("jsonwebtoken");
-const authMiddleware = (req, res, next) => {
+const userMiddleware = (req, res, next) => {
   const token = req.headers.token.split(" ")[1];
+  const userId = req.params.id;
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err)
       return res.status(401).json({
         status: "ERR",
         message: "Token is expired!",
       });
-    user?.isAdmin
+    user?.isAdmin || user?.id === userId
       ? next()
       : res.json({
           status: "ERR",
@@ -16,4 +17,4 @@ const authMiddleware = (req, res, next) => {
   });
 };
 
-module.exports = { authMiddleware };
+module.exports = { userMiddleware };

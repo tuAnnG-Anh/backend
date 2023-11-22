@@ -19,7 +19,7 @@ const getUserById = async (req, res) => {
       const { password, ...response } = user._doc;
       res.json({
         status: "OK",
-        message: "SUCESS",
+        message: "SUCCESS",
         data: response,
       });
     }
@@ -29,10 +29,10 @@ const getUserById = async (req, res) => {
     });
   }
 };
+
 const getAllUsers = async (req, res) => {
   try {
     let { _page, _size, sort } = req.query;
-
     // If the page is not applied in query.
     if (!_page) {
       // Make the Default value one.
