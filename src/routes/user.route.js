@@ -4,12 +4,11 @@ const {
   getAllUsers,
   deleteUser,
 } = require("../controllers/user.controller");
-const { authMiddleware } = require("../middlewares/auth.Middleware");
 const { userMiddleware } = require("../middlewares/user.Middleware");
 
 const userRoute = require("express").Router();
 
-userRoute.get("/", authMiddleware, getAllUsers);
+userRoute.get("/", getAllUsers);
 userRoute.get("/:id", userMiddleware, getUserById);
 userRoute.put("/update/:id", updateUser);
 userRoute.delete("/:id", deleteUser);

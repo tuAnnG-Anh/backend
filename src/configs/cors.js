@@ -1,5 +1,5 @@
 const WHITELIST_DOMAINS = require("../utils/constains");
-const corsOptions = {
+var corsOptions = {
   origin: function (origin, callback) {
     if (WHITELIST_DOMAINS.indexOf(origin) !== -1) {
       callback(null, true);

@@ -15,8 +15,8 @@ const port = process.env.PORT;
 const app = express();
 
 //cors
-app.use(cors(corsOptions));
-
+// app.use(cors(corsOptions));
+app.use(cors());
 //Template engine
 //config template engine
 const configHandlebar = { extname: ".hbs" };
