@@ -7,22 +7,21 @@ const genneralAccessToken = async (payload) => {
 };
 const genneralRefreshToken = async (payload) => {
   var refreshToken = jwt.sign({ ...payload }, process.env.JWT_SECRET, {
-    expiresIn: "365d",
+    expiresIn: "15s",
   });
   return refreshToken;
 };
 const requestRefreshToken = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
-  console.log(refreshToken);
   if (!refreshToken) {
-    return res.status(403).json({
+    return res.status(401).send({
       status: "ERR",
       message: "Invalid refresh token",
     });
   }
   jwt.verify(refreshToken, process.env.JWT_SECRET, async (err, user) => {
     if (err)
-      res.status(401).json({
+      return res.status(401).send({
         status: "ERR",
         message: "The token is required",
       });
@@ -30,7 +29,7 @@ const requestRefreshToken = async (req, res) => {
       id: user.id,
       isAdmin: user.isAdmin,
     });
-    res.json({ status: "OK", message: "SUCCESS", accessToken });
+    return res.send({ status: "OK", message: "SUCCESS", accessToken });
   });
 };
 module.exports = {

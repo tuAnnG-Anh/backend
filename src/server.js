@@ -16,13 +16,20 @@ const app = express();
 
 //cors
 // app.use(cors(corsOptions));
-const corsOrigin = {
-  origin: "http://localhost:5173", //or whatever port your frontend is using
-  credentials: true,
-  optionSuccessStatus: 200,
-};
-app.use(cors(corsOrigin));
-
+// const corsOrigin = {
+//   origin: "http://localhost:5173", //or whatever port your frontend is using
+//   credentials: true,
+//   optionSuccessStatus: 200,
+// };
+// app.use(cors(corsOrigin));
+app.use(
+  cors({
+    credentials: true,
+    origin: (_, callback) => callback(null, true),
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    optionsSuccessStatus: 200,
+  })
+);
 //Template engine
 //config template engine
 const configHandlebar = { extname: ".hbs" };
