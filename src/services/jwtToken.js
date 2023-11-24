@@ -13,6 +13,7 @@ const genneralRefreshToken = async (payload) => {
 };
 const requestRefreshToken = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
+  console.log(refreshToken);
   if (!refreshToken) {
     return res.status(403).json({
       status: "ERR",

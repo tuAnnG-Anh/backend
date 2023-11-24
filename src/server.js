@@ -8,7 +8,7 @@ const cors = require("cors");
 const routes = require("./routes/app.route");
 const connectDatabase = require("./configs/database");
 var cookieParser = require("cookie-parser");
-const { corsOptions } = require("./configs/cors");
+// const { corsOptions } = require("./configs/cors");
 // const { corsOptions } = require("./configs/cors");
 dotenv.config();
 const port = process.env.PORT;
@@ -16,7 +16,13 @@ const app = express();
 
 //cors
 // app.use(cors(corsOptions));
-app.use(cors());
+const corsOrigin = {
+  origin: "http://localhost:5173", //or whatever port your frontend is using
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOrigin));
+
 //Template engine
 //config template engine
 const configHandlebar = { extname: ".hbs" };
