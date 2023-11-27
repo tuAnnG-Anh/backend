@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const feedbackSchema = new mongoose.Schema(
   {
-    id: { type: String, required: true, unique },
     id_user: { type: String, required: true, unique },
     id_product: { type: String, required: true, unique },
     feedback: { type: String },

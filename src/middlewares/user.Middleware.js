@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
+const _CONF = require("../configs/jwtConfig");
 const userMiddleware = (req, res, next) => {
   const token = req.headers.token.split(" ")[1];
   const userId = req.params.id;
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+  jwt.verify(token, _CONF.SECRET, (err, user) => {
     if (err)
       return res.status(401).json({
         status: "ERR",

@@ -1,5 +1,7 @@
 const User = require("../models/user.models.js");
 const bcrypt = require("bcrypt");
+const _CONF = require("../configs/jwtConfig.js");
+const jwt = require("jsonwebtoken");
 const {
   genneralAccessToken,
   genneralRefreshToken,
@@ -84,9 +86,13 @@ const loginUser = async (req, res) => {
         path: "/",
         sameSite: "strict",
       });
+      var decoded = jwt.verify(accessToken, _CONF.SECRET);
+      const { password, ...userResponse } = user._doc;
       return res.status(200).json({
         status: "OK",
         message: "Success",
+        exp: decoded.exp,
+        user: userResponse,
         accessToken,
         // refreshToken,
       });
